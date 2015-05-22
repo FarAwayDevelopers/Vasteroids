@@ -5,9 +5,13 @@ using SDL;
 class InputComponent : Object {
     protected Entity *entity;
 
+    protected GLib.HashTable<SDL.Keycode?, bool> keyStates;
+
 
     public InputComponent.with_entity(Entity *e) {
         entity = e;
+
+        keyStates = new GLib.HashTable<SDL.Keycode?, bool>(str_hash, str_equal);
     }
 
     public virtual bool handle(Event e) {
@@ -38,24 +42,22 @@ class SpaceshipInputComponent : InputComponent {
 
     protected override void processKey(Event e) {
         KeyboardEvent ke = e.key;
+        keyStates[ke.keysym.sym] = e.type == EventType.KEYDOWN;
 
-        switch(ke.keysym.sym) {
-            case SDL.Keycode.w:
-                ((Spaceship*) entity)->setSteadyY(e.type == EventType.KEYDOWN);
-                if(e.type == EventType.KEYDOWN) ((Spaceship*) entity)->setVY(-5);
-                break;
-            case SDL.Keycode.s:
-                ((Spaceship*) entity)->setSteadyY(e.type == EventType.KEYDOWN);
-                if(e.type == EventType.KEYDOWN) ((Spaceship*) entity)->setVY(5);
-                break;
-            case SDL.Keycode.a:
-                ((Spaceship*) entity)->setSteadyX(e.type == EventType.KEYDOWN);
-                if(e.type == EventType.KEYDOWN) ((Spaceship*) entity)->setVX(-5);
-                break;
-            case SDL.Keycode.d:
-                ((Spaceship*) entity)->setSteadyX(e.type == EventType.KEYDOWN);
-                if(e.type == EventType.KEYDOWN) ((Spaceship*) entity)->setVX(5);
-                break;
+        ((Spaceship*) entity)->setSteadyX(keyStates[SDL.Keycode.a] || keyStates[SDL.Keycode.d]);
+        ((Spaceship*) entity)->setSteadyY(keyStates[SDL.Keycode.w] || keyStates[SDL.Keycode.s]);
+
+        if(keyStates[SDL.Keycode.w]) {
+            ((Spaceship*) entity)->setVY(-5);
+        }
+        if(keyStates[SDL.Keycode.s]) {
+            ((Spaceship*) entity)->setVY(5);
+        }
+        if(keyStates[SDL.Keycode.a]) {
+            ((Spaceship*) entity)->setVX(-5);
+        }
+        if(keyStates[SDL.Keycode.d]) {
+            ((Spaceship*) entity)->setVX(5);
         }
     }
 }
