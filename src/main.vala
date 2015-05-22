@@ -1,5 +1,6 @@
 using GLib;
 using SDL;
+using SDLGraphics;
 
 
 class Vasteroids : Object {
@@ -8,7 +9,7 @@ class Vasteroids : Object {
 
     protected bool running = true;
 
-    protected View _map_view;
+    protected SceneView _map_view;
 
     public Vasteroids() {
         SDL.init(SDL.InitFlag.EVERYTHING|SDLImage.InitFlags.ALL);
@@ -32,6 +33,7 @@ class Vasteroids : Object {
 
         while(running) {
             handleEvents();
+            update();
             render();
 
             SDL.Timer.delay(10);
@@ -44,6 +46,8 @@ class Vasteroids : Object {
     private void initScene() {
         _map_view = new SceneView();
         _map_view.setRenderer(renderer);
+
+        _map_view.addEntity(new Spaceship());
     }
 
     private void handleEvents() {
@@ -67,6 +71,10 @@ class Vasteroids : Object {
 
         renderer.present();
         window.update_surface();
+    }
+
+    private void update() {
+        _map_view.update();
     }
 }
 

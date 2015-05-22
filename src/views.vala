@@ -4,34 +4,50 @@ using SDL;
 class View : Object {
     protected unowned SDL.Renderer renderer;
 
-    protected RenderComponent renderComponent = null;
-    protected InputComponent inputComponent = null;
-
-
     public virtual void setRenderer(SDL.Renderer r) {
         renderer = r;
     }
 
-    public virtual bool handle(Event e) {
-        if(inputComponent ==  null) {
-            return false;
-        }
+    public virtual void render() {
 
-        return inputComponent.handle(e);
     }
 
-    public virtual void render() {
-        if(renderComponent ==  null) {
-            return;
-        }
+    public virtual bool handle(Event e) {
+        return false;
+    }
 
-        renderComponent.render(renderer);
+    public virtual void update() {
+
     }
 }
 
 class SceneView : View {
+    private Entity[] entities;
+
     public SceneView() {
-        renderComponent = new SceneRenderComponent();
-        inputComponent = new SceneInputComponent();
+
+    }
+
+    public void addEntity(Entity e) {
+        entities += e;
+    }
+
+    public override void render() {
+        foreach(Entity e in entities) {
+            e.render(renderer);
+        }
+    }
+
+    public override bool handle(Event ev) {
+        foreach(Entity e in entities) {
+            e.handle(ev);
+        }
+        return false;
+    }
+
+    public override void update() {
+        foreach(Entity e in entities) {
+            e.update();
+        }
     }
 }
