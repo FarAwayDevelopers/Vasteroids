@@ -5,6 +5,7 @@ using SDL;
 class InputComponent : Object {
     protected Entity *entity;
 
+
     public InputComponent.with_entity(Entity *e) {
         entity = e;
     }
@@ -16,7 +17,7 @@ class InputComponent : Object {
         switch(e.type) {
             case EventType.KEYDOWN:
             case EventType.KEYUP:
-                processKey(e.key);
+                processKey(e);
                 break;
             default:
                 break;
@@ -25,7 +26,7 @@ class InputComponent : Object {
         return false;
     }
 
-    protected virtual void processKey(KeyboardEvent e) {
+    protected virtual void processKey(Event e) {
 
     }
 }
@@ -35,19 +36,25 @@ class SpaceshipInputComponent : InputComponent {
         base.with_entity(e);
     }
 
-    protected override void processKey(KeyboardEvent e) {
-        switch(e.keysym.sym) {
+    protected override void processKey(Event e) {
+        KeyboardEvent ke = e.key;
+
+        switch(ke.keysym.sym) {
             case SDL.Keycode.w:
-                ((Spaceship*) entity)->accelerate(0, -5);
+                ((Spaceship*) entity)->setSteadyY(e.type == EventType.KEYDOWN);
+                if(e.type == EventType.KEYDOWN) ((Spaceship*) entity)->setVY(-5);
                 break;
             case SDL.Keycode.s:
-                ((Spaceship*) entity)->accelerate(0, 5);
+                ((Spaceship*) entity)->setSteadyY(e.type == EventType.KEYDOWN);
+                if(e.type == EventType.KEYDOWN) ((Spaceship*) entity)->setVY(5);
                 break;
             case SDL.Keycode.a:
-                ((Spaceship*) entity)->accelerate(-5, 0);
+                ((Spaceship*) entity)->setSteadyX(e.type == EventType.KEYDOWN);
+                if(e.type == EventType.KEYDOWN) ((Spaceship*) entity)->setVX(-5);
                 break;
             case SDL.Keycode.d:
-                ((Spaceship*) entity)->accelerate(5, 0);
+                ((Spaceship*) entity)->setSteadyX(e.type == EventType.KEYDOWN);
+                if(e.type == EventType.KEYDOWN) ((Spaceship*) entity)->setVX(5);
                 break;
         }
     }

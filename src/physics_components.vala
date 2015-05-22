@@ -1,4 +1,5 @@
 using GLib;
+using GLib.Math;
 using SDL;
 
 
@@ -18,6 +19,9 @@ class SpaceshipPhysicComponent : PhysicComponent {
     public double vx { get; set; default = 0; }
     public double vy { get; set; default = 0; }
 
+    public bool steadyX { get; set; default = false; }
+    public bool steadyY { get; set; default = false; }
+
 
     public SpaceshipPhysicComponent.with_entity(Entity *e) {
         base.with_entity(e);
@@ -27,7 +31,13 @@ class SpaceshipPhysicComponent : PhysicComponent {
         entity->x = (int) (entity->x + vx);
         entity->y = (int) (entity->y + vy);
 
-        vx *= 0.95;
-        vy *= 0.95;
+        if(!steadyX) {
+            vx *= 0.9;
+            vx = (fabs(vx) < 1)?0:vx;
+        }
+        if(!steadyY) {
+            vy *= 0.9;
+            vy = (fabs(vy) < 1)?0:vy;
+        }
     }
 }

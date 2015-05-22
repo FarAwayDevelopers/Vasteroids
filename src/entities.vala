@@ -42,8 +42,19 @@ class Spaceship : Entity {
         physicComponent = new SpaceshipPhysicComponent.with_entity(this);
     }
 
-    public void accelerate(double vx, double vy) {
+    public void setVX(double vx) {
         ((SpaceshipPhysicComponent) physicComponent).vx = vx;
+    }
+
+    public void setVY(double vy) {
         ((SpaceshipPhysicComponent) physicComponent).vy = vy;
+    }
+
+    public void setSteadyX(bool steady) {
+        ((SpaceshipPhysicComponent) physicComponent).steadyX = steady;
+    }
+
+    public void setSteadyY(bool steady) {
+        ((SpaceshipPhysicComponent) physicComponent).steadyY = steady;
     }
 }
