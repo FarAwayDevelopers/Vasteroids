@@ -11,7 +11,7 @@ class Vasteroids : Object {
     protected View _map_view;
 
     public Vasteroids() {
-        SDL.init(SDL.InitFlag.EVERYTHING| SDLImage.InitFlags.ALL);
+        SDL.init(SDL.InitFlag.EVERYTHING|SDLImage.InitFlags.ALL);
 
         window = new Window(
             "Vasteroids",
@@ -21,7 +21,7 @@ class Vasteroids : Object {
         );
         renderer = new SDL.Renderer(
             window, -1,
-            SDL.RendererFlags.ACCELERATED | SDL.RendererFlags.PRESENTVSYNC
+            SDL.RendererFlags.ACCELERATED|SDL.RendererFlags.PRESENTVSYNC
         );
 
         window.show();
