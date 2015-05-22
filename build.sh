@@ -11,5 +11,5 @@ valac \
     -X -lSDL2_ttf \
     -X -lSDL2_mixer \
     -X -lSDL2_gfx \
-    -o "../vasteroids"\
+    -o "../vasteroids" \
     main.vala views.vala render_components.vala input_components.vala
