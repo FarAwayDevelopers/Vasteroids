@@ -3,10 +3,10 @@ using GLib.Math;
 using SDL;
 
 
-class PhysicComponent : Object {
+class PhysicsComponent : Object {
     protected Entity *entity;
 
-    public PhysicComponent.with_entity(Entity *e) {
+    public PhysicsComponent.with_entity(Entity *e) {
         entity = e;
     }
 
@@ -15,7 +15,7 @@ class PhysicComponent : Object {
     }
 }
 
-class SpaceshipPhysicComponent : PhysicComponent {
+class SpaceshipPhysicsComponent : PhysicsComponent {
     public double vx { get; set; default = 0; }
     public double vy { get; set; default = 0; }
 
@@ -23,7 +23,7 @@ class SpaceshipPhysicComponent : PhysicComponent {
     public bool steadyY { get; set; default = false; }
 
 
-    public SpaceshipPhysicComponent.with_entity(Entity *e) {
+    public SpaceshipPhysicsComponent.with_entity(Entity *e) {
         base.with_entity(e);
     }
 

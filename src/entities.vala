@@ -4,7 +4,7 @@ using SDL;
 class Entity : Object {
     protected RenderComponent renderComponent = null;
     protected InputComponent inputComponent = null;
-    protected PhysicComponent physicComponent = null;
+    protected PhysicsComponent physicsComponent = null;
 
     public int x { get; set; default = 100; }
     public int y { get; set; default = 100; }
@@ -27,11 +27,11 @@ class Entity : Object {
     }
 
     public virtual void update() {
-        if(physicComponent ==  null) {
+        if(physicsComponent ==  null) {
             return;
         }
 
-        physicComponent.update();
+        physicsComponent.update();
     }
 }
 
@@ -39,22 +39,22 @@ class Spaceship : Entity {
     public Spaceship() {
         renderComponent = new SpaceshipRenderComponent.with_entity(this);
         inputComponent = new SpaceshipInputComponent.with_entity(this);
-        physicComponent = new SpaceshipPhysicComponent.with_entity(this);
+        physicsComponent = new SpaceshipPhysicsComponent.with_entity(this);
     }
 
     public void setVX(double vx) {
-        ((SpaceshipPhysicComponent) physicComponent).vx = vx;
+        ((SpaceshipPhysicsComponent) physicsComponent).vx = vx;
     }
 
     public void setVY(double vy) {
-        ((SpaceshipPhysicComponent) physicComponent).vy = vy;
+        ((SpaceshipPhysicsComponent) physicsComponent).vy = vy;
     }
 
     public void setSteadyX(bool steady) {
-        ((SpaceshipPhysicComponent) physicComponent).steadyX = steady;
+        ((SpaceshipPhysicsComponent) physicsComponent).steadyX = steady;
     }
 
     public void setSteadyY(bool steady) {
-        ((SpaceshipPhysicComponent) physicComponent).steadyY = steady;
+        ((SpaceshipPhysicsComponent) physicsComponent).steadyY = steady;
     }
 }
