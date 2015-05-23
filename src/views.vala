@@ -1,4 +1,5 @@
 using SDL;
+using Gee;
 
 
 class View : Object {
@@ -22,31 +23,38 @@ class View : Object {
 }
 
 class SceneView : View {
-    private Entity[] entities;
+    private ArrayList<Entity> entities;
 
     public SceneView() {
-
+        entities = new ArrayList<Entity>();
     }
 
     public void addEntity(Entity e) {
-        entities += e;
+        entities.add(e);
     }
 
     public override void render() {
-        foreach(Entity e in entities) {
+        Iterator<Entity> iter = entities.iterator();
+        while(iter.next()) {
+            Entity e = iter.get();
             e.render(renderer);
         }
     }
 
     public override bool handle(Event ev) {
-        foreach(Entity e in entities) {
+        Iterator<Entity> iter = entities.iterator();
+        while(iter.next()) {
+            Entity e = iter.get();
             e.handle(ev);
         }
+
         return false;
     }
 
     public override void update() {
-        foreach(Entity e in entities) {
+        Iterator<Entity> iter = entities.iterator();
+        while(iter.next()) {
+            Entity e = iter.get();
             e.update();
         }
     }
