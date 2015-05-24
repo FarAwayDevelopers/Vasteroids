@@ -50,8 +50,27 @@ class Vasteroids : Object {
         _map_view = new SceneView();
         _map_view.setRenderer(renderer);
 
-        _map_view.addEntity(new Background.with_texture("assets/background.png"));
-        _map_view.addEntity(new Spaceship.with_coordinates(window_width/2, window_height/2));
+
+        Spaceship spaceship = new Spaceship.with_coordinates(window_width/2, window_height/2);
+
+        Background bg = new Background.with_texture("assets/background.png");
+        bg.z = 10;
+        spaceship.notify["x"].connect((source, param) => {
+            bg.viewportOffsetX = ((Entity) source).x;
+            bg.viewportOffsetY = ((Entity) source).y;
+        });
+
+        Background mg = new Background.with_texture("assets/midground.png");
+        mg.z = 5;
+        spaceship.notify["x"].connect((source, param) => {
+            mg.viewportOffsetX = ((Entity) source).x;
+            mg.viewportOffsetY = ((Entity) source).y;
+        });
+
+
+        _map_view.addEntity(bg);
+        _map_view.addEntity(mg);
+        _map_view.addEntity(spaceship);
     }
 
     private void handleEvents() {

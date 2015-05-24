@@ -39,10 +39,16 @@ class Spaceship : Entity {
     public double mouseX;
     public double mouseY;
 
+    public int renderX;
+    public int renderY;
+
 
     public Spaceship.with_coordinates(int x, int y) {
         this.x = x;
         this.y = y;
+
+        renderX = x;
+        renderY = y;
 
         renderComponent = new SpaceshipRenderComponent.with_entity(this);
         inputComponent = new SpaceshipInputComponent.with_entity(this);
@@ -67,6 +73,12 @@ class Spaceship : Entity {
 }
 
 class Background : Entity {
+    public int z { get; set; default = 1; }
+
+    public int viewportOffsetX { get; set; default = 0; }
+    public int viewportOffsetY { get; set; default = 0; }
+
+
     public Background.with_texture(string texPath) {
         renderComponent = new BackgroundRenderComponent.with_entity(this);
         inputComponent = new BackgroundInputComponent.with_entity(this);

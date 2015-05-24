@@ -27,11 +27,14 @@ class SpaceshipRenderComponent : RenderComponent {
     }
 
     public override void render(Renderer renderer) {
-        Rect src = {0, 0, image.w, image.h};
-        Rect dst = {entity->x, entity->y, image.w, image.h};
+        int ex = ((Spaceship *) entity)->renderX;
+        int ey = ((Spaceship *) entity)->renderY;
 
-        int emx = entity->x + image.w/2;
-        int emy = entity->y + image.h/2;
+        Rect src = {0, 0, image.w, image.h};
+        Rect dst = {ex, ey, image.w, image.h};
+
+        int emx = ex + image.w/2;
+        int emy = ey + image.h/2;
 
         int mox = (int) ((Spaceship*) entity)->mouseX;
         int moy = (int) ((Spaceship*) entity)->mouseY;
@@ -50,6 +53,10 @@ class SpaceshipRenderComponent : RenderComponent {
 }
 
 class BackgroundRenderComponent : RenderComponent {
+    private int sectorWidth { get; set; default = 100; }
+    private int sectorHeight { get; set; default = 100; }
+
+
     public BackgroundRenderComponent.with_entity(Entity *e) {
         base.with_entity(e);
     }
@@ -62,7 +69,10 @@ class BackgroundRenderComponent : RenderComponent {
     }
 
     public override void render(Renderer renderer) {
-        Rect src = {0, 0, image.w, image.h};
+        int vox = ((Background*) entity)->viewportOffsetX / ((Background*) entity)->z;
+        int voy = ((Background*) entity)->viewportOffsetY / ((Background*) entity)->z;
+
+        Rect src = {vox, voy, sectorWidth, sectorHeight};
         Rect dst;
         renderer.get_viewport(out dst);
 
