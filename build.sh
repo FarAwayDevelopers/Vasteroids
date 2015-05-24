@@ -11,5 +11,6 @@ valac \
     -X -lSDL2_ttf \
     -X -lSDL2_mixer \
     -X -lSDL2_gfx \
+    -X -lm \
     -o "vasteroids" \
     $(find src/ -name "*.vala" | xargs)

@@ -27,9 +27,24 @@ class SpaceshipRenderComponent : RenderComponent {
     }
 
     public override void render(Renderer renderer) {
-        //Rect src = {0, 0, 100, 100};
-        Rect dst = {entity->x, entity->y, 100, 100};
+        Rect src = {0, 0, image.w, image.h};
+        Rect dst = {entity->x, entity->y, image.w, image.h};
 
-        renderer.copy(Texture.from_surface(renderer, image), null, dst);
+        int emx = entity->x + image.w/2;
+        int emy = entity->y + image.h/2;
+
+        int mox = (int) ((Spaceship*) entity)->mouseX;
+        int moy = (int) ((Spaceship*) entity)->mouseY;
+
+        double angle = Math.atan2(moy - emy, mox - emx);
+        angle *= 180/Math.PI;
+        angle += 90;
+
+        renderer.copyex(
+            Texture.from_surface(renderer, image),
+            src, dst,
+            angle, null,
+            RendererFlip.NONE
+        );
     }
 }

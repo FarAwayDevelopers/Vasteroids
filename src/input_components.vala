@@ -23,6 +23,9 @@ class InputComponent : Object {
             case EventType.KEYUP:
                 processKey(e);
                 break;
+            case EventType.MOUSEMOTION:
+                processMouse(e);
+                break;
             default:
                 break;
         }
@@ -31,6 +34,10 @@ class InputComponent : Object {
     }
 
     protected virtual void processKey(Event e) {
+
+    }
+
+    protected virtual void processMouse(Event e) {
 
     }
 }
@@ -59,5 +66,12 @@ class SpaceshipInputComponent : InputComponent {
         if(keyStates[SDL.Keycode.d]) {
             ((Spaceship*) entity)->setVX(5);
         }
+    }
+
+    protected override void processMouse(Event e) {
+        MouseMotionEvent me = e.motion;
+
+        ((Spaceship*) entity)->mouseX = me.x;
+        ((Spaceship*) entity)->mouseY = me.y;
     }
 }

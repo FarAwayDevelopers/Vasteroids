@@ -36,6 +36,10 @@ class Entity : Object {
 }
 
 class Spaceship : Entity {
+    public double mouseX;
+    public double mouseY;
+
+
     public Spaceship() {
         renderComponent = new SpaceshipRenderComponent.with_entity(this);
         inputComponent = new SpaceshipInputComponent.with_entity(this);
