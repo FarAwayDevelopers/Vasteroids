@@ -34,7 +34,8 @@ class InputComponent : Object {
     }
 
     protected virtual void processKey(Event e) {
-
+        KeyboardEvent ke = e.key;
+        keyStates[ke.keysym.sym] = e.type == EventType.KEYDOWN;
     }
 
     protected virtual void processMouse(Event e) {
@@ -48,8 +49,7 @@ class SpaceshipInputComponent : InputComponent {
     }
 
     protected override void processKey(Event e) {
-        KeyboardEvent ke = e.key;
-        keyStates[ke.keysym.sym] = e.type == EventType.KEYDOWN;
+        base.processKey(e);
 
         ((Spaceship*) entity)->setSteadyX(keyStates[SDL.Keycode.a] || keyStates[SDL.Keycode.d]);
         ((Spaceship*) entity)->setSteadyY(keyStates[SDL.Keycode.w] || keyStates[SDL.Keycode.s]);
@@ -82,6 +82,6 @@ class BackgroundInputComponent : InputComponent {
     }
 
     protected override void processKey(Event e) {
-
+        base.processKey(e);
     }
 }
