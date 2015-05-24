@@ -39,6 +39,8 @@ class Spaceship : Entity {
     public double mouseX;
     public double mouseY;
 
+    public double angle = 0;
+
     public int renderX;
     public int renderY;
 

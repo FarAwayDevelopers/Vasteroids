@@ -39,14 +39,12 @@ class SpaceshipRenderComponent : RenderComponent {
         int mox = (int) ((Spaceship*) entity)->mouseX;
         int moy = (int) ((Spaceship*) entity)->mouseY;
 
-        double angle = Math.atan2(moy - emy, mox - emx);
-        angle *= 180/Math.PI;
-        angle += 90;
+        ((Spaceship*) entity)->angle = Math.atan2(moy - emy, mox - emx) * 180/Math.PI + 90;
 
         renderer.copyex(
             Texture.create_from_surface(renderer, image),
             src, dst,
-            angle, null,
+            ((Spaceship*) entity)->angle, null,
             RendererFlip.NONE
         );
     }

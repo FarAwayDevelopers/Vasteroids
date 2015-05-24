@@ -55,9 +55,12 @@ class SpaceshipInputComponent : InputComponent {
         ((Spaceship*) entity)->setSteadyY(keyStates[SDL.Keycode.w] || keyStates[SDL.Keycode.s]);
 
         if(keyStates[SDL.Keycode.w]) {
-            ((Spaceship*) entity)->setVY(-((Spaceship*) entity)->speed);
+            double x = Math.sin(((Spaceship*) entity)->angle/180*Math.PI) * ((Spaceship*) entity)->speed;
+            double y = - Math.cos(((Spaceship*) entity)->angle/180*Math.PI) * ((Spaceship*) entity)->speed;
+            ((Spaceship*) entity)->setVX(x);
+            ((Spaceship*) entity)->setVY(y);
         }
-        if(keyStates[SDL.Keycode.s]) {
+        /*if(keyStates[SDL.Keycode.s]) {
             ((Spaceship*) entity)->setVY(((Spaceship*) entity)->speed);
         }
         if(keyStates[SDL.Keycode.a]) {
@@ -65,7 +68,7 @@ class SpaceshipInputComponent : InputComponent {
         }
         if(keyStates[SDL.Keycode.d]) {
             ((Spaceship*) entity)->setVX(((Spaceship*) entity)->speed);
-        }
+        }*/
     }
 
     protected override void processMouse(Event e) {
