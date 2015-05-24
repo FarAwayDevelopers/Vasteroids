@@ -3,9 +3,9 @@ using Gee;
 
 
 class View : Object {
-    protected unowned SDL.Renderer renderer;
+    protected unowned Renderer renderer;
 
-    public virtual void setRenderer(SDL.Renderer r) {
+    public virtual void setRenderer(Renderer r) {
         renderer = r;
     }
 

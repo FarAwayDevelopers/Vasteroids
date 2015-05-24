@@ -1,15 +1,17 @@
 using GLib;
 using SDL;
+using SDLImage;
 
 
 class RenderComponent : Object {
     protected Entity *entity;
+    protected Surface image;
 
     public RenderComponent.with_entity(Entity *e) {
         entity = e;
     }
 
-    public virtual void render(SDL.Renderer renderer) {
+    public virtual void render(Renderer renderer) {
 
     }
 }
@@ -17,12 +19,17 @@ class RenderComponent : Object {
 class SpaceshipRenderComponent : RenderComponent {
     public SpaceshipRenderComponent.with_entity(Entity *e) {
         base.with_entity(e);
+
+        image = load("assets/spaceship.png");
+        if(image == null) {
+            GLib.error("Image could not be loaded\n");
+        }
     }
 
-    public override void render(SDL.Renderer renderer) {
-        renderer.set_draw_color(250, 200, 0, 250);
-        renderer.fill_rect({entity->x, entity->y, 100, 100}) ;
+    public override void render(Renderer renderer) {
+        //Rect src = {0, 0, 100, 100};
+        Rect dst = {entity->x, entity->y, 100, 100};
 
-        renderer.set_draw_color(100, 200, 100, 250);
+        renderer.copy(Texture.from_surface(renderer, image), null, dst);
     }
 }

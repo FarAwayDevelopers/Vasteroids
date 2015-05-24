@@ -18,7 +18,7 @@ class Entity : Object {
         return inputComponent.handle(e);
     }
 
-    public virtual void render(SDL.Renderer renderer) {
+    public virtual void render(Renderer renderer) {
         if(renderComponent ==  null) {
             return;
         }
