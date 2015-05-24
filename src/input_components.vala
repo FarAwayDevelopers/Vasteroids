@@ -55,16 +55,16 @@ class SpaceshipInputComponent : InputComponent {
         ((Spaceship*) entity)->setSteadyY(keyStates[SDL.Keycode.w] || keyStates[SDL.Keycode.s]);
 
         if(keyStates[SDL.Keycode.w]) {
-            ((Spaceship*) entity)->setVY(-5);
+            ((Spaceship*) entity)->setVY(-((Spaceship*) entity)->speed);
         }
         if(keyStates[SDL.Keycode.s]) {
-            ((Spaceship*) entity)->setVY(5);
+            ((Spaceship*) entity)->setVY(((Spaceship*) entity)->speed);
         }
         if(keyStates[SDL.Keycode.a]) {
-            ((Spaceship*) entity)->setVX(-5);
+            ((Spaceship*) entity)->setVX(-((Spaceship*) entity)->speed);
         }
         if(keyStates[SDL.Keycode.d]) {
-            ((Spaceship*) entity)->setVX(5);
+            ((Spaceship*) entity)->setVX(((Spaceship*) entity)->speed);
         }
     }
 

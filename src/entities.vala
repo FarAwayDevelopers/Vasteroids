@@ -42,6 +42,8 @@ class Spaceship : Entity {
     public int renderX;
     public int renderY;
 
+    public double speed = 15;
+
 
     public Spaceship.with_coordinates(int x, int y) {
         this.x = x;
