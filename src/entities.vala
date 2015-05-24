@@ -6,8 +6,8 @@ class Entity : Object {
     protected InputComponent inputComponent = null;
     protected PhysicsComponent physicsComponent = null;
 
-    public int x { get; set; default = 100; }
-    public int y { get; set; default = 100; }
+    public int x { get; set; default = 0; }
+    public int y { get; set; default = 0; }
 
 
     public virtual bool handle(Event e) {
@@ -40,7 +40,10 @@ class Spaceship : Entity {
     public double mouseY;
 
 
-    public Spaceship() {
+    public Spaceship.with_coordinates(int x, int y) {
+        this.x = x;
+        this.y = y;
+
         renderComponent = new SpaceshipRenderComponent.with_entity(this);
         inputComponent = new SpaceshipInputComponent.with_entity(this);
         physicsComponent = new SpaceshipPhysicsComponent.with_entity(this);

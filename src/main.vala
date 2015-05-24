@@ -44,10 +44,13 @@ class Vasteroids : Object {
     }
 
     private void initScene() {
+        int window_width, window_height;
+        window.get_size(out window_width, out window_height);
+
         _map_view = new SceneView();
         _map_view.setRenderer(renderer);
 
-        _map_view.addEntity(new Spaceship());
+        _map_view.addEntity(new Spaceship.with_coordinates(window_width/2, window_height/2));
     }
 
     private void handleEvents() {
