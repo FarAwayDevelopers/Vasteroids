@@ -48,3 +48,27 @@ class SpaceshipRenderComponent : RenderComponent {
         );
     }
 }
+
+class BackgroundRenderComponent : RenderComponent {
+    public BackgroundRenderComponent.with_entity(Entity *e) {
+        base.with_entity(e);
+    }
+
+    public void setTexture(string texPath) {
+        image = load(texPath);
+        if(image == null) {
+            GLib.error("Image could not be loaded\n");
+        }
+    }
+
+    public override void render(Renderer renderer) {
+        Rect src = {0, 0, image.w, image.h};
+        Rect dst;
+        renderer.get_viewport(out dst);
+
+        renderer.copy(
+            Texture.from_surface(renderer, image),
+            src, dst
+        );
+    }
+}

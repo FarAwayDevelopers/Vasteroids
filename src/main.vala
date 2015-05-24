@@ -50,6 +50,7 @@ class Vasteroids : Object {
         _map_view = new SceneView();
         _map_view.setRenderer(renderer);
 
+        _map_view.addEntity(new Background.with_texture("assets/background.png"));
         _map_view.addEntity(new Spaceship.with_coordinates(window_width/2, window_height/2));
     }
 

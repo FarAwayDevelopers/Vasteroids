@@ -75,3 +75,13 @@ class SpaceshipInputComponent : InputComponent {
         ((Spaceship*) entity)->mouseY = me.y;
     }
 }
+
+class BackgroundInputComponent : InputComponent {
+    public BackgroundInputComponent.with_entity(Entity *e) {
+        base.with_entity(e);
+    }
+
+    protected override void processKey(Event e) {
+
+    }
+}

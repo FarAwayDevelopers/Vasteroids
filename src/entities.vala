@@ -65,3 +65,12 @@ class Spaceship : Entity {
         ((SpaceshipPhysicsComponent) physicsComponent).steadyY = steady;
     }
 }
+
+class Background : Entity {
+    public Background.with_texture(string texPath) {
+        renderComponent = new BackgroundRenderComponent.with_entity(this);
+        inputComponent = new BackgroundInputComponent.with_entity(this);
+
+        ((BackgroundRenderComponent) renderComponent).setTexture(texPath);
+    }
+}
