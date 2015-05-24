@@ -44,7 +44,7 @@ class SpaceshipRenderComponent : RenderComponent {
         angle += 90;
 
         renderer.copyex(
-            Texture.from_surface(renderer, image),
+            Texture.create_from_surface(renderer, image),
             src, dst,
             angle, null,
             RendererFlip.NONE
@@ -77,7 +77,7 @@ class BackgroundRenderComponent : RenderComponent {
         renderer.get_viewport(out dst);
 
         renderer.copy(
-            Texture.from_surface(renderer, image),
+            Texture.create_from_surface(renderer, image),
             src, dst
         );
     }

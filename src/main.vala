@@ -20,7 +20,7 @@ class Vasteroids : Object {
             800, 600,
             WindowFlags.RESIZABLE
         );
-        renderer = new SDL.Renderer(
+        renderer = SDL.Renderer.create(
             window, -1,
             SDL.RendererFlags.ACCELERATED|SDL.RendererFlags.PRESENTVSYNC
         );
