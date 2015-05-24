@@ -1,3 +1,5 @@
+cd "$( dirname "${BASH_SOURCE[0]}" )"
+
 valac \
     --pkg gee-0.8 \
     --pkg sdl2 \
