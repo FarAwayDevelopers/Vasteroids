@@ -1,4 +1,5 @@
 using SDL;
+using cp;
 
 
 class Entity : Object {
@@ -46,6 +47,9 @@ class Spaceship : Entity {
 
     public double speed = 15;
 
+    public Body body;
+    public Shape shape;
+
 
     public Spaceship.with_coordinates(int x, int y) {
         this.x = x;
@@ -57,6 +61,13 @@ class Spaceship : Entity {
         renderComponent = new SpaceshipRenderComponent.with_entity(this);
         inputComponent = new SpaceshipInputComponent.with_entity(this);
         physicsComponent = new SpaceshipPhysicsComponent.with_entity(this);
+
+        body = new Body(10, 0);
+        body.p = {x, y};
+        body.data = this;
+
+        shape = new CircleShape(body, 20, {0, 0});
+        shape.collision_type = 1;
     }
 
     public void setVX(double vx) {

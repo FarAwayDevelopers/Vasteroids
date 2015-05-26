@@ -1,6 +1,7 @@
 using GLib;
 using SDL;
 using SDLGraphics;
+using cp;
 
 
 class Vasteroids : Object {
@@ -11,7 +12,19 @@ class Vasteroids : Object {
 
     protected SceneView _map_view;
 
+    protected Space space;
+
     public Vasteroids() {
+        setupSDL();
+        setupChipmunk();
+    }
+
+    public void setupChipmunk() {
+        space = new Space();
+        space.gravity = {0, 0};
+    }
+
+    public void setupSDL() {
         SDL.init(SDL.InitFlag.EVERYTHING|SDLImage.InitFlags.ALL);
 
         window = new Window(
@@ -67,10 +80,13 @@ class Vasteroids : Object {
             mg.viewportOffsetY = ((Entity) source).y;
         });
 
-
         _map_view.addEntity(bg);
         _map_view.addEntity(mg);
         _map_view.addEntity(spaceship);
+
+
+        space.AddBody(spaceship.body);
+        space.AddShape(spaceship.shape);
     }
 
     private void handleEvents() {
@@ -98,6 +114,7 @@ class Vasteroids : Object {
 
     private void update() {
         _map_view.update();
+        space.Step(0.1);
     }
 }
 
