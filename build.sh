@@ -7,6 +7,7 @@ valac \
     --pkg sdl2-ttf \
     --pkg sdl2-image \
     --pkg sdl2-mixer \
+    --vapidir="./vapis" \
     -X -lSDL2_image \
     -X -lSDL2_ttf \
     -X -lSDL2_mixer \
